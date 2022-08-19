@@ -1,0 +1,34 @@
+.input{
+  padding: 0.5rem 0.9375rem;
+  border-radius: 0.9375rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.76);
+  outline: none;
+  min-width: 18.75rem;
+  margin-bottom: 0.9375rem;
+  transition: all 0.3s ease;
+  &::placeholder{
+    color: #ffffff;
+  }
+  &:focus{
+    border-color: #ffffff;
+    box-shadow: rgba(92, 167, 218, 0.1) 0px 0px 16px;
+  }
+}
+
+.button{
+  border: none;
+  color: #ffffff;
+  border-radius: 0.9375rem;
+  background-color: #2770a1;
+  cursor: pointer;
+  padding: 10px 15px;
+  margin-left: 0.625rem;
+  min-width: 12.5rem;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  &:hover{
+    background-color: #20577a;
+  }
+}

@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgba(20, 33, 47, 0.9);
+  color: whitesmoke;
 }
 
 *,
@@ -61,4 +63,29 @@ button,
 textarea,
 select {
   font: inherit;
+}
+
+
+.heading{
+  font-size: 1.875rem;
+  line-height: 115%;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem;
+}
+
+.content{
+  width: 100%;
+  margin: 0 auto;
+  background-color: rgba(21, 37, 50, 0.9);
+  border-radius: 2.5rem;
+  padding: 3rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 }

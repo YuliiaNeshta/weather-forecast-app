@@ -1,1 +1,3 @@
-export const types = 1;
+export interface SearchProps {
+  onKeyPress: (string) => void;
+}

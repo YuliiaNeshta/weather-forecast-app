@@ -1,3 +1,6 @@
 export interface TableProps {
-  location: string;
+  tableData: [];
+  isLoading: boolean;
+  isSuccess: boolean;
+  refetch: () => void;
 }
