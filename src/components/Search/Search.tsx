@@ -20,6 +20,7 @@ export const Search: FC<SearchProps> = ({ handleLocation }) => {
 
   return (
     <div>
+      <div className={styles.heading}>Hi! 😃 If you want to know the weather in the city, write it here </div>
       <input
         value={value}
         onChange={event => setValue(event.target.value)}

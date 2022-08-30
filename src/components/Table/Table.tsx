@@ -26,27 +26,28 @@ export const Table: FC<TableProps> = ({ tableData = [], deleteLocation }) => {
       {' '}
       <div className="table">
         <div className="table__header">
-          <div className="table__cell">City</div>
           {/*{date.map(day => (*/}
           {/*  <div key={day} className="table__cell">*/}
           {/*    {day}*/}
           {/*  </div>*/}
           {/*))}*/}
         </div>
-        <div className="table__body">
+        <div className={styles.grid}>
           {tableData.map(
             cell =>
               cell && (
-                <div key={cell.name}>
-                  <div className="table__cell">{cell?.name}</div>
-                  <div>{convertFahrenheitToCelsius(cell.main?.temp)}</div>
-                  <div>{cell.weather[0]?.description}</div>
+                <div className={styles.card} key={cell.name}>
+                  <div className="table__cell">City: {cell?.name}</div>
+                  <div>Temperature: {convertFahrenheitToCelsius(cell.main?.temp)}</div>
+                  <div>Description: {cell.weather[0]?.description}</div>
                   <div className="">
                     <img src={`http://openweathermap.org/img/wn/${cell.weather[0]?.icon}@2x.png`} alt="weather icon" />
                   </div>
-                  <button onClick={() => deleteLocation(cell.name)}>X</button>
+                  <button className={styles.deleteButton} onClick={() => deleteLocation(cell.name)}>
+                    X
+                  </button>
                   <button className={styles.button} onClick={() => refreshCityData(cell.name.toUpperCase())}>
-                    update information
+                    update info
                   </button>
                 </div>
               ),

@@ -6,7 +6,41 @@
   background-color: lightskyblue;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
   &:hover{
     background-color: #7da3ee;
   }
+}
+
+.deleteButton{
+  border-radius: 50%;
+  border: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  background-color: #ee1f4b;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-weight: 500;
+  &:hover{
+    background-color: #e50404;
+  }
+}
+
+.card{
+  padding: 1rem;
+  border: 1px solid white;
+  border-radius: 0.625rem;
+  position: relative;
+}
+
+.grid{
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.9375rem;
 }
