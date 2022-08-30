@@ -1,6 +1,4 @@
 export interface TableProps {
-  tableData: [];
-  isLoading: boolean;
-  isSuccess: boolean;
-  refetch: () => void;
+  tableData: any[];
+  deleteLocation: (string) => void;
 }

@@ -1,35 +1,34 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery, useQueries, useQueryClient } from '@tanstack/react-query';
 import { Search } from '../components/Search';
 import { Table } from '../components/Table';
 import getWeather from '../services/getWeather';
 
 const App: FC = () => {
-  const [location, setLocation] = useState<string>('Sumy');
-  const [tableData, setTableData] = useState<any[]>([]);
+  const [location, setLocation] = useState<string[]>([]);
 
-  const { data, isLoading, isSuccess, refetch } = useQuery(['weatherData', location], () => getWeather(location), {
-    refetchOnWindowFocus: false,
-    enabled: false,
-    onSuccess: data => {
-      setTableData([...tableData, data]);
-    },
+  const queryClient = useQueryClient();
+
+  const results = useQueries({
+    queries: location.map(loc => ({ queryKey: [loc], queryFn: () => getWeather(loc) })),
   });
 
-  const handleLocation = location => {
-    setLocation(location);
+  const handleLocation = loc => {
+    if (!location.includes(loc.toUpperCase())) {
+      setLocation(prevState => [...prevState, loc.toUpperCase()]);
+    }
   };
 
-  useEffect(() => {
-    refetch();
-  }, [location]);
+  const deleteLocation = loc => {
+    setLocation(prevState => prevState.filter(value => value !== loc.toUpperCase()));
+  };
 
   return (
     <div className="wrapper">
       <h1 className="heading">Weather forecast</h1>
       <div className="content">
-        <Search onKeyPress={handleLocation} />
-        <Table tableData={tableData} isLoading={isLoading} isSuccess={isSuccess} refetch={refetch} />
+        <Search handleLocation={handleLocation} />
+        <Table deleteLocation={deleteLocation} tableData={results.map(response => response.data)} />
       </div>
     </div>
   );
