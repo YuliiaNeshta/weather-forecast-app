@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { SearchProps } from './types';
 // @ts-ignore
-import styles from './search.module.scss';
+import styles from './Search.module.scss';
 
 export const Search: FC<SearchProps> = ({ handleLocation }) => {
   const [value, setValue] = useState('');

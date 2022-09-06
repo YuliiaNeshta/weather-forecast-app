@@ -1,53 +1,44 @@
-import React, { FC, ReactNode, useState } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
-import getWeather from '../../services/getWeather';
-
-import { TableProps } from './types';
+import React, { FC } from 'react';
 // @ts-ignore
 import styles from './Table.module.scss';
 
-export const Table: FC<TableProps> = ({ tableData = [], deleteLocation }) => {
-  if (!tableData) return null;
+import { TableProps } from './types';
 
-  console.log('tableData', tableData);
-
-  // const date = ['22.08', '23.08'];
-
-  const queryClient = useQueryClient();
-
-  const refreshCityData = loc => {
-    queryClient.invalidateQueries([loc]);
-  };
+export const Table: FC<TableProps> = ({ tableData = [], deleteLocation, isLoading }) => {
+  if (!tableData.length) return null;
 
   const convertFahrenheitToCelsius = temp => (temp - 273.15).toFixed(1) + ' °C';
 
   return (
     <>
-      {' '}
       <div className="table">
-        <div className="table__header">
-          {/*{date.map(day => (*/}
-          {/*  <div key={day} className="table__cell">*/}
-          {/*    {day}*/}
-          {/*  </div>*/}
-          {/*))}*/}
-        </div>
+        {isLoading && 'Loading...'}
         <div className={styles.grid}>
           {tableData.map(
             cell =>
-              cell && (
-                <div className={styles.card} key={cell.name}>
-                  <div className="table__cell">City: {cell?.name}</div>
-                  <div>Temperature: {convertFahrenheitToCelsius(cell.main?.temp)}</div>
-                  <div>Description: {cell.weather[0]?.description}</div>
-                  <div className="">
-                    <img src={`http://openweathermap.org/img/wn/${cell.weather[0]?.icon}@2x.png`} alt="weather icon" />
+              cell.data && (
+                <div className={styles.card} key={cell.data.name}>
+                  <div className="table__cell">City: {cell.data.name}</div>
+                  <div>Temperature: {convertFahrenheitToCelsius(cell.data.main.temp)}</div>
+                  <div>Description: {cell.data.weather[0]?.description}</div>
+                  <div>
+                    <div>
+                      <img
+                        className={styles.img}
+                        src={`http://openweathermap.org/img/wn/${cell.data.weather[0]?.icon}@2x.png`}
+                        alt="weather icon"
+                      />
+                    </div>
                   </div>
-                  <button className={styles.deleteButton} onClick={() => deleteLocation(cell.name)}>
+                  <button className={styles.deleteButton} onClick={() => deleteLocation(cell.data.name)}>
                     X
                   </button>
-                  <button className={styles.button} onClick={() => refreshCityData(cell.name.toUpperCase())}>
-                    update info
+                  <button
+                    disabled={cell.isFetching}
+                    className={styles.button}
+                    onClick={() => cell.refetch({ stale: true })}
+                  >
+                    {cell.isFetching ? 'updating...' : 'update info'}
                   </button>
                 </div>
               ),

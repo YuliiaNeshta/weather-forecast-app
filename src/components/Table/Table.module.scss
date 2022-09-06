@@ -1,4 +1,4 @@
-.button{
+.button {
   border: none;
   color: white;
   border-radius: 0.4375rem;
@@ -9,12 +9,16 @@
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-  &:hover{
+  &:hover {
     background-color: #7da3ee;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #587181;
   }
 }
 
-.deleteButton{
+.deleteButton {
   border-radius: 50%;
   border: none;
   width: 2.25rem;
@@ -43,4 +47,9 @@
   display: flex;
   flex-direction: column;
   row-gap: 0.9375rem;
+}
+
+.img{
+  min-width: 6.25rem;
+  min-height: 6.25rem;
 }
