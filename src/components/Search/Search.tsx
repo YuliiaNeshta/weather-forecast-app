@@ -18,6 +18,7 @@ export const Search: FC<SearchProps> = ({ handleLocation }) => {
     setValue('');
   };
 
+  // По-хорошему это должна быть форма. И слушать submit будет логичнее. Не забывай про базовый HTML.
   return (
     <div>
       <div className={styles.heading}>Hi! 😃 If you want to know the weather in the city, write it here </div>
